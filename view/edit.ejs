@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>upload</title>
+</head>
+
+<body>
+    <div>
+        <%data.recordset.forEach(function(i){ %>
+        <form action="/home/edit/<%=i.masp %>/<%= i.anh %>"enctype="multipart/form-data" method="POST" >
+            <div>
+                <input type="text" name ="tensp" value="<%=i.tensp %>">
+            </div>
+            <div>
+                <input type="text" name="soluongg" value="<%=i.soluong %>">
+            </div>
+            <div>
+                <input type="number" name="gia" value="<%= i.gia %>">
+            </div>
+            <div>
+                <div>
+                    <h4>anh cu</h4>
+                </div>
+                <div>
+                    <img src="/upload/<%= i.anh %>" width="80px" height="auto">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h4>chon anh moi</h4>
+                </div>
+                <div>
+                    <input type="file" name="file">
+                </div>
+            </div>
+            <br/>
+            <button type="submit">upload</button>
+        </form>
+        <%})%>
+    </div>
+</body>
+
+</html>

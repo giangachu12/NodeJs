@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <% data.recordset.forEach(function(item){ %>
+    <h1 id='h1'><%=item.masp %></h1>
+    <%})%>
+    <form>
+        <input type='email' id='email'>
+        <input type="password" id='password' placeholder="password">
+        <button type="button" id='submit'>submit</button>
+    </form>
+    <script>
+        $(document).ready(function () {
+            var email, password, sampham, ms;
+            ms = $('#h1').html();
+            console.log(ms)
+            $('#submit').click(function () {
+                email = $('#email').val();
+                password = $('#password').val();
+                $.post('/home/dangnhap', { email: email, password: password, ms: ms }, function (ee) {
+                    if (ee) {
+                        console.log(ee, '=======>data login')
+                        window.location.href = "/home/info/" + ee;
+                    }
+                })
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <meta charset="UTF-8">
+    <title>trang chu</title>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <nav>
+        <ul id='ul1'>
+            <li class="li1">
+                <form id="form_edit">
+                    <input type="text" placeholder="search" id="search">
+                    <button id="button">search</button>
+                </form>
+            </li>
+            <li class="li1">
+                <button><a href="/home/add">add</a></button>
+            </li>
+            <li class="li1 ww">
+                <a href="">
+                    <img src='./image/gio hang.jpg' width="30px" height="30px">
+                    <p class='show_cart'>
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <aside>
+        <div id="div_thuonghieu">
+            <h4>THƯƠNG HIỆU</h4>
+        </div>
+        <div>
+            <ul id="ul_aside_produc">
+                <li class="thuonghieu">
+                    <input type="checkbox">CASIO</imput>
+                </li>
+                <li class="thuonghieu">
+                    <input type="checkbox">MOVADO</imput>
+                </li>
+                <li class="thuonghieu">
+                    <input type="checkbox">HAMILTON</imput>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <article id="article">
+
+    </article>
+    <footer>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("ready!")
+            $.ajax({
+                type: 'get',
+                url: `/home/list`,
+                data: {},
+                datatype: "json",
+                success: function (response) {
+                    console.log(response.data + "======>")
+                    showProducts(response.data);
+                    search(response);
+                }
+            })
+            function search(res) {
+                $('#search').keyup(function () {
+                    //-------------->note
+                    var arr = [];
+                    var kyee = $(this).val().toUpperCase();
+                    console.log(kyee, '-------------->>>>>>');
+                    res.data.filter(function (item) {
+                        var a = item.tensp;
+                        console.log(a, "---------------->")
+                        if (a.toUpperCase().indexOf(kyee) > -1) {
+                            console.log(item, '------------------>item')
+                            arr.push(item);
+                        }
+                    })
+                    showProducts(arr);
+                })
+            }
+            function showProducts(d) {
+                console.log(d, "==============> d in arrr")
+                var article = $("#article");
+                var tag = '';
+                d.filter(function (item) {
+                    console.log(item.anh,'==========>anh')
+                    tag += `
+                    <div class="lis_images">
+                        <div class="list_images_padding">
+                            <a href="/home/info/${item.masp}">
+                                <img src="/upload/${item.anh}" alt="anh" width="100%" height="200px">
+                            </a>
+                            
+                            <h3 class="h3_name_produc">${item.tensp}</h3>
+                            <h3 class="h3_name_price">${item.gia}</h3>
+                        </div>
+                        <div>
+                            <button><a href="/home/edit/${item.masp}/${item.anh}">edit</a></button>
+                            <button><a href="/home/delet/${item.masp}/${item.anh} " onclick="return confirm('are you sure?')">delet</a></button>
+                        </div>
+                    </div>
+                    `
+                    article.html(tag);
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>

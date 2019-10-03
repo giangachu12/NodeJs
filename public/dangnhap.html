@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <meta charset="UTF-8">
+    <title>trang chu</title>
+</head>
+
+<body>
+    </aside>
+    <article id="article">
+        <div id="form_email">
+            <form id='form'>
+                <input type="number" placeholder="passwork" id='passwork' name='passwork'>
+                <input type='text' placeholder="email" id='email' name='email'>
+                <button type='button' id='button'>submit</button>
+                <button><a href="dangki.html">dang ki</a></button>
+            </form>
+        </div>
+    </article>
+    <footer>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+        $('#button').click(function () {
+            console.log("ready!")
+            var email = $('#email').val();
+            var pass = $('#pass').val();
+            console.log(email, '------------>email')
+            $.ajax({
+                url: '/show/infor',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                    email: email,
+                    pass: pass,
+                },
+                success: function (result) {
+                    console.log(result)
+                },
+                complete: function (data) {
+                    window.location.href='/'
+                }
+            })
+        });
+
+    </script>
+</body>
+
+</html>

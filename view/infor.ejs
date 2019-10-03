@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <link rel="stylesheet" href="/css/infor_ejs.css">
+    <meta charset="UTF-8">
+    <title>trang chu</title>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <nav>
+        <a href="/">
+            <h3>trang chu</h3>
+        </a>
+    </nav>
+    <hr>
+    <% data.recordset.forEach(function(item){ %>
+    <article id="article">
+        <div class="lis_images">
+            <div id="left">
+                <div class="show_anh">
+                    <img src="/upload/<%= item.anh %>" width="100%" height="auto">
+                </div>
+            </div>
+            <div id="right">
+                <div class="show_gia">
+                    <h3 class="h3_name_price">GIÁ : <%= item.gia %></h3>
+                    <h3 class="h3_name_price">TEN SAM PHẨM : <%=item.tensp %></h3>
+                    <h3 class="h3_name_price"> CÒN: <%= item.soluong %> san phẩm</h3>
+                </div>
+            </div>
+            <div id="dat">
+                <div id="khungdat">
+                    <button id="datmua"> THEM VAO GIO HANG </button>
+                    <button id="datmua">MUA NGAY</button>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </article>
+    <footer>
+    </footer>
+</body>
+
+</html>
